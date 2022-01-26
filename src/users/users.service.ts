@@ -11,15 +11,16 @@ export class UsersService {
   
   //Appeler constructeur avec  InjectModel ('User') et le model Schema Users
 
-  constructor(@InjectModel('User') private readonly userModel: Model<Users>){ }
+  constructor(@InjectModel('User') private readonly userModel: Model<Users>){}
   
   
-  async create(createUserInput: CreateUserInput) {
-    return 'This action adds a new user';
-  }
+  async create(createUserInput: CreateUserInput): Promise<Users> {
+    const createUser = new this.userModel(createUserInput);
+    return createUser.save();
+}
 
-  async findAll() {
-    return `This action returns all users`;
+  async findAll(): Promise<Users[]> {
+    return await this.userModel.find().exec();
   }
 
   async findOne(id: string) {
