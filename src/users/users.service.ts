@@ -23,8 +23,8 @@ export class UsersService {
     return await this.userModel.find().exec();
   }
 
-  async findOne(id: string) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string): Promise<Users> {
+    return await this.userModel.findById(id);
   }
 
   async update(id: string, updateUserInput: UpdateUserInput): Promise<Users> {
