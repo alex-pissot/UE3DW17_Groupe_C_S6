@@ -31,7 +31,7 @@ export class UsersService {
     return await this.userModel.findByIdAndUpdate(id, updateUserInput).exec();
   }
 
-  async remove(id: string) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) : Promise<any> {
+    return await this.userModel.findByIdAndDelete(id);
   }
 }
